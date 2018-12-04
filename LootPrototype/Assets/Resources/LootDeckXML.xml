@@ -1,0 +1,97 @@
+<xml>
+	<!-- decorators appear on every card. They are the suit and rank in the corners. -->
+	<card type="pirateship" value="1" color="gold" sprite=" "/>
+  <card type="pirateship" value="1" color="gold" sprite=" "/>
+  <card type="pirateship" value="2" color="gold" sprite=" "/>
+  <card type="pirateship" value="2" color="gold" sprite=" "/>
+  <card type="pirateship" value="2" color="gold" sprite=" "/>
+  <card type="pirateship" value="2" color="gold" sprite=" "/>
+  <card type="pirateship" value="3" color="gold" sprite=" "/>
+  <card type="pirateship" value="3" color="gold" sprite=" "/>
+  <card type="pirateship" value="3" color="gold" sprite=" "/>
+  <card type="pirateship" value="3" color="gold" sprite=" "/>
+  <card type="pirateship" value="4" color="gold" sprite=" "/>
+  <card type="pirateship" value="4" color="gold" sprite=" "/>
+  
+  <card type="pirateship" value="1" color="green" sprite=" "/>
+  <card type="pirateship" value="1" color="green" sprite=" "/>
+  <card type="pirateship" value="2" color="green" sprite=" "/>
+  <card type="pirateship" value="2" color="green" sprite=" "/>
+  <card type="pirateship" value="2" color="green" sprite=" "/>
+  <card type="pirateship" value="2" color="green" sprite=" "/>
+  <card type="pirateship" value="3" color="green" sprite=" "/>
+  <card type="pirateship" value="3" color="green" sprite=" "/>
+  <card type="pirateship" value="3" color="green" sprite=" "/>
+  <card type="pirateship" value="3" color="green" sprite=" "/>
+  <card type="pirateship" value="4" color="green" sprite=" "/>
+  <card type="pirateship" value="4" color="green" sprite=" "/>
+  
+  <card type="pirateship" value="1" color="purple" sprite=" "/>
+  <card type="pirateship" value="1" color="purple" sprite=" "/>
+  <card type="pirateship" value="2" color="purple" sprite=" "/>
+  <card type="pirateship" value="2" color="purple" sprite=" "/>
+  <card type="pirateship" value="2" color="purple" sprite=" "/>
+  <card type="pirateship" value="2" color="purple" sprite=" "/>
+  <card type="pirateship" value="3" color="purple" sprite=" "/>
+  <card type="pirateship" value="3" color="purple" sprite=" "/>
+  <card type="pirateship" value="3" color="purple" sprite=" "/>
+  <card type="pirateship" value="3" color="purple" sprite=" "/>
+  <card type="pirateship" value="4" color="purple" sprite=" "/>
+  <card type="pirateship" value="4" color="purple" sprite=" "/>
+  
+  <card type="pirateship" value="1" color="blue" sprite=" "/>
+  <card type="pirateship" value="1" color="blue" sprite=" "/>
+  <card type="pirateship" value="2" color="blue" sprite=" "/>
+  <card type="pirateship" value="2" color="blue" sprite=" "/>
+  <card type="pirateship" value="2" color="blue" sprite=" "/>
+  <card type="pirateship" value="2" color="blue" sprite=" "/>
+  <card type="pirateship" value="3" color="blue" sprite=" "/>
+  <card type="pirateship" value="3" color="blue" sprite=" "/>
+  <card type="pirateship" value="3" color="blue" sprite=" "/>
+  <card type="pirateship" value="3" color="blue" sprite=" "/>
+  <card type="pirateship" value="4" color="blue" sprite=" "/>
+  <card type="pirateship" value="4" color="blue" sprite=" "/>
+  
+  <card type="merchant" value="2" color="none" sprite=" "/>
+  <card type="merchant" value="2" color="none" sprite=" "/>
+  <card type="merchant" value="2" color="none" sprite=" "/>
+  <card type="merchant" value="2" color="none" sprite=" "/>
+  <card type="merchant" value="2" color="none" sprite=" "/>
+  
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  <card type="merchant" value="3" color="none" sprite=" "/>
+  
+  <card type="merchant" value="4" color="none" sprite=" "/>
+  <card type="merchant" value="4" color="none" sprite=" "/>
+  <card type="merchant" value="4" color="none" sprite=" "/>
+  <card type="merchant" value="4" color="none" sprite=" "/>
+  <card type="merchant" value="4" color="none" sprite=" "/>
+  
+  <card type="merchant" value="5" color="none" sprite=" "/>
+  <card type="merchant" value="5" color="none" sprite=" "/>
+  <card type="merchant" value="5" color="none" sprite=" "/>
+  <card type="merchant" value="5" color="none" sprite=" "/>
+  <card type="merchant" value="5" color="none" sprite=" "/>
+  
+  <card type="merchant" value="6" color="none" sprite=" "/>
+  <card type="merchant" value="6" color="none" sprite=" "/>
+  
+  <card type="merchant" value="7" color="none" sprite=" "/>
+  
+  <card type="merchant" value="8" color="none" sprite=" "/>
+  
+  <card type="captain" value="0" color="gold" sprite=" "/>
+  <card type="captain" value="0" color="green" sprite=" "/>
+  <card type="captain" value="0" color="purple" sprite=" "/>
+  <card type="captain" value="0" color="blue" sprite=" "/>
+  
+  <card type="admiral" value="0" color="none" sprite=" "/>
+ 
+  
+	<!-- A list of all cards that defines where pips are placed. -->
+	
+</xml>
