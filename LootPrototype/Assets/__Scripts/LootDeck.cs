@@ -2,21 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LootDeck : MonoBehaviour {
+public class LootDeck : MonoBehaviour
+{
 
     [Header("Set in Inspector")]
     public bool startFaceUp = false;
-    // Suits
-    public Sprite suitClub;
-    public Sprite suitDiamond;
-    public Sprite suitHeart;
-    public Sprite suitSpade;
-    public Sprite[] faceSprites;
-    public Sprite[] rankSprites;
+    // Card Colors
+    public Sprite cardColorBlue;
+    public Sprite cardColorGreen;
+    public Sprite cardColorPurple;
+    public Sprite cardColorYellow;
+    public Sprite[] cardSprites;
+    public Sprite[] valueSprites;
     public Sprite cardBack;
-    public Sprite cardBackGold;
     public Sprite cardFront;
-    public Sprite cardFrontGold;
     // Prefabs
     public GameObject prefabCard;
     public GameObject prefabSprite;
@@ -25,10 +24,10 @@ public class LootDeck : MonoBehaviour {
     public PT_XMLReader xmlr;
     public List<string> cardNames;
     public List<Card> cards;
-    public List<Decorator> decorators;
     public List<CardDefinition> cardDefs;
     public Transform deckAnchor;
-    public Dictionary<string, Sprite> dictSuits;
+    public Dictionary<string, Sprite> dictCardColors;
+    public Color purple = new Color32(210 / 255, 0 / 255, 255 / 255, 255 / 255);
 
     // InitDeck is called by Prospector when it is ready
     public void InitDeck(string lootDeckXMLText)
@@ -41,12 +40,12 @@ public class LootDeck : MonoBehaviour {
         }
 
         // Initialize the Dictionary of SuitSprites with necessary Sprites
-        dictSuits = new Dictionary<string, Sprite>()
+        dictCardColors = new Dictionary<string, Sprite>()
         {
-            {"C", suitClub},
-            {"D", suitDiamond},
-            {"H", suitHeart},
-            {"S", suitSpade}
+            {"B", cardColorBlue},
+            {"G", cardColorGreen},
+            {"P", cardColorPurple},
+            {"Y", cardColorYellow}
         };
 
         ReadDeck(lootDeckXMLText);
@@ -60,87 +59,28 @@ public class LootDeck : MonoBehaviour {
         xmlr = new PT_XMLReader(); // Create a new PT_XMLReader
         xmlr.Parse(lootDeckXMLText); // Use that PT_XMLReader to parse DeckXML
 
-        // This prints a test line to show you how xmlr can be used.
-        // For more information read about XML in the Useful Concepts Appendix
-        string s = "xml[0] decorator[o]";
-        s += "type=" + xmlr.xml["xml"][0]["decorator"][0].att("type");
-        s += "x=" + xmlr.xml["xml"][0]["decorator"][0].att("x");
-        s += "y=" + xmlr.xml["xml"][0]["decorator"][0].att("y");
-        s += "scale=" + xmlr.xml["xml"][0]["decorator"][0].att("scale");
-        print(s);
-
-        // Read decorators for all Cards
-        decorators = new List<Decorator>(); // Init the list of Decorators
-        // Grab an PT_XMLHashList of all <decorator>s in the XML file
-        PT_XMLHashList xDecos = xmlr.xml["xml"][0]["decorator"];
-        Decorator deco;
-        for (int i=0; i<xDecos.Count; i++)
-        {
-            // For each <decorator> in the XML
-            deco = new Decorator(); // Make a new Decorator
-            // Copy the attributes of the <decorator> to the Decorator
-            deco.type = xDecos[i].att("type");
-            // bool deco.flip is true if the text of the flip attribute is "1"
-            deco.flip = (xDecos[i].att("flip") == "1");
-            // floats need to be parsed from the attribute strings
-            deco.scale = float.Parse(xDecos[i].att("scale"));
-            // Vector3 loc initializes to [0,0,0], so we just need to modify it
-            deco.loc.x = float.Parse(xDecos[i].att("x"));
-            deco.loc.y = float.Parse(xDecos[i].att("y"));
-            deco.loc.z = float.Parse(xDecos[i].att("z"));
-            // Add the temporary deco to the List decorators
-            decorators.Add(deco);
-        }
-
-        // Read pip locations for each card number
+        // Read skull locations for each card number
         cardDefs = new List<CardDefinition>(); // Init the List of Cards
         // Grab an PT_XMLHashList of all the <card>s in the XML file
         PT_XMLHashList xCardDefs = xmlr.xml["xml"][0]["card"];
-        for (int i=0; i<xCardDefs.Count; i++)
+        for (int i = 0; i < xCardDefs.Count; i++)
         {
             // For each of the <card>s
             // Create a new CardDefinition
             CardDefinition cDef = new CardDefinition();
             // Parse the attribute values and add them to cDef
-            cDef.rank = int.Parse(xCardDefs[i].att("rank"));
-            // Grab an PT_XMLHashList of all the <pip>s on this <card>
-            PT_XMLHashList xPips = xCardDefs[i]["pip"];
-            if(xPips != null)
-            {
-                for(int j=0; j<xPips.Count; j++)
-                {
-                    // Iterate through all the <pip>s
-                    deco = new Decorator();
-                    // <pip>s on the <card> are handled via the Decorator class
-                    deco.type = "pip";
-                    deco.flip = (xPips[j].att("flip") == "1");
-                    deco.loc.x = float.Parse(xPips[j].att("x"));
-                    deco.loc.y = float.Parse(xPips[j].att("y"));
-                    deco.loc.z = float.Parse(xPips[j].att("z"));
-                    if (xPips[j].HasAtt("scale"))
-                    {
-                        deco.scale = float.Parse(xPips[j].att("scale"));
-                    }
-                    cDef.pips.Add(deco);
-                }
-            }
-            // Face cards (Jack, Queen, & King) have a face attribute
-            if (xCardDefs[i].HasAtt("face"))
-            {
-                cDef.face = xCardDefs[i].att("face");
-            }
-            cardDefs.Add(cDef);
+            cDef.value = int.Parse(xCardDefs[i].att("value"));
         }
     }
 
-    // Get the proper CardDefinition based on Rank (1 to 14 is Ace to King)
-    public CardDefinition GetCardDefinitionByRank(int rnk)
+    // Get the proper CardDefinition based on Value (1 to 4 is one skull to four skulls)
+    public CardDefinition GetCardDefinitionByValue(int val)
     {
         // Search through all of the CardDefinitions
         foreach (CardDefinition cd in cardDefs)
         {
             // If the rank is correct, return this definition
-            if (cd.rank == rnk)
+            if (cd.value == val)
             {
                 return (cd);
             }
@@ -152,12 +92,12 @@ public class LootDeck : MonoBehaviour {
     public void MakeCards()
     {
         // cardNames will be the names of cards to build
-        // Each suit goes from 1 to 14 (e.g., C1 to C14 for Clubs)
+        // Each card color goes from 1 to 4 (e.g., B1 to B4 for Blues)
         cardNames = new List<string>();
-        string[] letters = new string[] { "C", "D", "H", "S" };
+        string[] letters = new string[] { "B", "G", "P", "Y" };
         foreach (string s in letters)
         {
-            for (int i=0; i<13; i++)
+            for (int i = 0; i < 4; i++)
             {
                 cardNames.Add(s + (i + 1));
             }
@@ -167,7 +107,7 @@ public class LootDeck : MonoBehaviour {
         cards = new List<Card>();
 
         // Iterate through all of the card names that were just made
-        for (int i=0; i<cardNames.Count; i++)
+        for (int i = 0; i < cardNames.Count; i++)
         {
             // Make the card and add it to the cards Deck
             cards.Add(MakeCard(i));
@@ -183,23 +123,31 @@ public class LootDeck : MonoBehaviour {
         Card card = cgo.GetComponent<Card>(); // Get the Card Component
 
         // This line stacks the cards so that they're all in nice rows
-        cgo.transform.localPosition = new Vector3((cNum % 13) * 3, cNum / 13 * 4, 0);
+        cgo.transform.localPosition = new Vector3((cNum % 4) * 3, cNum / 4 * 4, 0);
 
         // Assign basic values to the Card
         card.name = cardNames[cNum];
-        card.suit = card.name[0].ToString();
-        card.rank = int.Parse(card.name.Substring(1));
-        if(card.suit == "D" || card.suit == "H")
+        card.cardColor = card.name[0].ToString();
+        card.value = int.Parse(card.name.Substring(1));
+        if (card.cardColor == "G")
         {
-            card.colS = "Red";
-            card.color = Color.red;
+            card.colS = "Green";
+            card.color = Color.green;
+        }
+        if (card.cardColor == "P")
+        {
+            card.colS = "Purple";
+            card.color = new Color32(210 / 255, 0 / 255, 255 / 255, 255 / 255);
+        }
+        if (card.cardColor == "Y")
+        {
+            card.colS = "Yellow";
+            card.color = Color.yellow;
         }
         // Pull the CardDefinition for this card
-        card.def = GetCardDefinitionByRank(card.rank);
+        card.def = GetCardDefinitionByValue(card.value);
 
-        AddDecorators(card);
-        AddPips(card);
-        AddFace(card);
+        AddCard(card);
         AddBack(card);
 
         return card;
@@ -210,114 +158,27 @@ public class LootDeck : MonoBehaviour {
     private GameObject _tGO = null;
     private SpriteRenderer _tSR = null;
 
-    private void AddDecorators(Card card)
+    private void AddCard(Card card)
     {
-        // Add Decorators
-        foreach(Decorator deco in decorators)
-        {
-            if(deco.type == "suit")
-            {
-                // Instantiate a Sprite GameObject
-                _tGO = Instantiate(prefabSprite) as GameObject;
-                // Get the SpriteRenderer Component
-                _tSR = _tGO.GetComponent<SpriteRenderer>();
-                // Set the Sprite to the proper suit
-                _tSR.sprite = dictSuits[card.suit];
-            }
-            else
-            {
-                _tGO = Instantiate(prefabSprite) as GameObject;
-                _tSR = _tGO.GetComponent<SpriteRenderer>();
-                // Get the proper Sprite to show this rank
-                _tSp = rankSprites[card.rank];
-                // Assign this rank Sprite to the SpriteRenderer
-                _tSR.sprite = _tSp;
-                // Set the color of the rank to match the suit
-                _tSR.color = card.color;
-            }
-            //Make the deco Sprites render above the Card
-            _tSR.sortingOrder = 1;
-            // Make the decorator Sprite a child of the Card
-            _tGO.transform.SetParent(card.transform);
-            // Set the localPosition based on the location from DeckXML
-            _tGO.transform.localPosition = deco.loc;
-            // Flip the decorator if needed
-            if (deco.flip)
-            {
-                // An Euler rotation of 180 degrees around the Z-axis will flip it
-                _tGO.transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
-            // Set the scale to keep decos from being too big
-            if(deco.scale != 1)
-            {
-                _tGO.transform.localScale = Vector3.one * deco.scale;
-            }
-            // Name this GameObject so it's easy to see
-            _tGO.name = deco.type;
-            //Add this deco GameObject to the List card.decoGOs
-            card.decoGOs.Add(_tGO);
-        }
-    }
-
-    private void AddPips(Card card)
-    {
-        // For each of the pips in the definition
-        foreach(Decorator pip in card.def.pips)
-        {
-            // ...Instantiate a Sprite GameObject
-            _tGO = Instantiate(prefabSprite) as GameObject;
-            // Set the parent to be the card GameObject
-            _tGO.transform.SetParent(card.transform);
-            // Set the position to that specified in the XML
-            _tGO.transform.localPosition = pip.loc;
-            // Flip it if necessary
-            if (pip.flip)
-            {
-                _tGO.transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
-            // Scale it if necessary (only for the Ace)
-            if(pip.scale != 1)
-            {
-                _tGO.transform.localScale = Vector3.one * pip.scale;
-            }
-            // Give this GameObject a name
-            _tGO.name = "pip";
-            // Get the SpriteRenderer Component
-            _tSR = _tGO.GetComponent<SpriteRenderer>();
-            // Set the Sprite to the proper suit
-            _tSR.sprite = dictSuits[card.suit];
-            // Set sortingOrder so the pip is rendered above the Card_Front
-            _tSR.sortingOrder = 1;
-            // Add this to the Card's list of pips
-            card.pipGOs.Add(_tGO);
-        }
-    }
-
-    private void AddFace(Card card)
-    {
-        if(card.def.face == "")
-        {
-            return; // No need to run this if it isn't a face card
-        }
-
         _tGO = Instantiate(prefabSprite) as GameObject;
         _tSR = _tGO.GetComponent<SpriteRenderer>();
         // Generate the right name and pass it to GetFace()
-        _tSp = GetFace(card.def.face + card.suit);
+        _tSp = GetCard("admir__");
+        //_tSp = GetCard(card.def.value + card.cardColor);
         _tSR.sprite = _tSp; // Assign this Sprite to _tSR
         _tSR.sortingOrder = 1; // Set the sortingOrder
         _tGO.transform.SetParent(card.transform);
         _tGO.transform.localPosition = Vector3.zero;
-        _tGO.name = "face";
+        _tGO.name = "card";
     }
 
     // Find the proper face card Sprite
-    private Sprite GetFace(string faceS)
+    private Sprite GetCard(string cardS)
     {
-        foreach(Sprite _tSP in faceSprites)
+        foreach (Sprite _tSP in cardSprites)
         {
-            // If this SPrite has the right name...
-            if(_tSP.name == faceS)
+            // If this Sprite has the right name...
+            if (_tSP.name == cardS)
             {
                 // ...then return the Sprite
                 return (_tSP);
@@ -352,7 +213,7 @@ public class LootDeck : MonoBehaviour {
         int ndx; // This will hold the index of the card to be moved
         tCards = new List<Card>(); // Initialize the temporary List
         // Repeat as long as there are cards in the original List
-        while(oCards.Count > 0)
+        while (oCards.Count > 0)
         {
             // Pick the index of a random card
             ndx = Random.Range(0, oCards.Count);

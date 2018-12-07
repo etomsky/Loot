@@ -4,15 +4,10 @@ using System.Collections.Generic;
 
 public class Card : MonoBehaviour {
     [Header("Set Dynamically")]
-    public string suit; // Suit of the Card (C,D,H, or S)
-    public int rank; // Rank of the Card (1-14)
-    public Color color = Color.black; // Color to tint pips
-    public string colS = "Black"; // Or "Red", Name of the Color
-
-    // This List holds all of the Decorator GameObjects
-    public List<GameObject> decoGOs = new List<GameObject>();
-    // This List holds all of the Pip GameObjects
-    public List<GameObject> pipGOs = new List<GameObject>();
+    public string cardColor; // Color of the Card (B,G,P, or Y)
+    public int value; // Value of the Card (1-4)
+    public Color color = Color.blue; // Color to tint pips
+    public string colS = "Blue"; // Or "Yellow", "Green", "Purple", Name of the Color
 
     public GameObject back; // The GameObject of the back of the card
 
@@ -72,7 +67,7 @@ public class Card : MonoBehaviour {
                     tSR.sortingOrder = sOrd + 2;
                     break;
 
-                case "face": // If the name is "face"
+                case "card": // If the name is "card"
                 default: // or if it's anything else
                     // Set it to the middle layer to be above the background
                     tSR.sortingOrder = sOrd + 1;
@@ -101,18 +96,9 @@ public class Card : MonoBehaviour {
 } // class Card
 
 [System.Serializable]
-public class Decorator
-{
-    public string type; // For card pips, type = "pip"
-    public Vector3 loc; // The location of the Sprite on the Card
-    public bool flip = false; // Whether to flip the Sprite vertically
-    public float scale = 1f; // The scale of the Sprite
-}
-
-[System.Serializable]
 public class CardDefinition
 {
-    public string face; // Sprite to use for each face card
-    public int rank; // The rank (1-13) of this card
-    public List<Decorator> pips = new List<Decorator>(); // Pips used
+    public string sprite; // Sprite to use for each card
+    public int value; // The value (1-4) of this card
+    public string cardColor; // The color (B, G, P, Y) of this card
 }

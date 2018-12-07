@@ -26,7 +26,7 @@ public class Loot : MonoBehaviour {
     public float drawTimeStagger = 0.1f;
 
     [Header("Set Dynamically")]
-    public Deck lootDeck;
+    public LootDeck lootDeck;
     public List<CardLoot> drawPile;
     public List<CardLoot> discardPile;
     public List<LootPlayer> players;
@@ -43,9 +43,9 @@ public class Loot : MonoBehaviour {
 
     private void Start()
     {
-        lootDeck = GetComponent<Deck>(); // Get the Deck
+        lootDeck = GetComponent<LootDeck>(); // Get the Deck
         lootDeck.InitDeck(lootDeckXML.text);
-        Deck.Shuffle(ref lootDeck.cards);
+        LootDeck.Shuffle(ref lootDeck.cards);
 
         layout = GetComponent<LootLayout>(); // Get the Layout
         layout.ReadLayout(lootLayoutXML.text);
@@ -198,7 +198,7 @@ public class Loot : MonoBehaviour {
                 cards.Add(cl);
             }
             discardPile.Clear();
-            Deck.Shuffle(ref cards);
+            LootDeck.Shuffle(ref cards);
             drawPile = UpgradeCardsList(cards);
             ArrangeDrawPile();
         }
@@ -226,8 +226,8 @@ public class Loot : MonoBehaviour {
         // It's a valid play if the color is not the same
         if (cl.color != targetCard.color) return (true);
 
-        // It's a valid play if the 
-        if (cl.suit == targetCard.suit)
+        // It's a valid play if the  
+        if (cl.cardColor == targetCard.cardColor)
         {
             return (true);
         }

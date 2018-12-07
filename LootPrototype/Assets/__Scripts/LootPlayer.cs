@@ -31,7 +31,7 @@ public class LootPlayer {
             CardLoot[] cards = hand.ToArray();
 
             // This is the LINQ call
-            cards = cards.OrderBy(cd => cd.rank).ToArray();
+            cards = cards.OrderBy(cd => cd.value).ToArray();
 
             hand = new List<CardLoot>(cards);
             // Note: LINQ operations can be a bit slow (like it could take a
