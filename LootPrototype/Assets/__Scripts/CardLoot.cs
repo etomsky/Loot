@@ -11,8 +11,6 @@ public enum CLState
     target,
     toHand,
     hand,
-    toBattle,
-    battle,
     discard,
     to,
     idle
@@ -73,7 +71,7 @@ public class CardLoot : Card {
         switch (state)
         {
             case CLState.toHand:
-            case CLState.toBattle:
+            case CLState.toTarget:
             case CLState.toDrawpile:
             case CLState.to:
                 float u = (Time.time - timeStart) / timeDuration;
@@ -90,7 +88,7 @@ public class CardLoot : Card {
                     uC = 1;
                     // Move from the to... state to the proper next state
                     if (state == CLState.toHand) state = CLState.hand;
-                    if (state == CLState.toBattle) state = CLState.battle;
+                    if (state == CLState.toTarget) state = CLState.toTarget;
                     if (state == CLState.toDrawpile) state = CLState.drawpile;
                     if (state == CLState.to) state = CLState.idle;
 

@@ -163,7 +163,7 @@ public class LootDeck : MonoBehaviour
         _tGO = Instantiate(prefabSprite) as GameObject;
         _tSR = _tGO.GetComponent<SpriteRenderer>();
         // Generate the right name and pass it to GetFace()
-        _tSp = GetCard("admir__");
+        _tSp = GetCard("merch_5");
         //_tSp = GetCard(card.def.value + card.cardColor);
         _tSR.sprite = _tSp; // Assign this Sprite to _tSR
         _tSR.sortingOrder = 1; // Set the sortingOrder

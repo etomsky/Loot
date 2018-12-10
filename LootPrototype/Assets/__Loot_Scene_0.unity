@@ -165,10 +165,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -215,10 +215,88 @@ MonoBehaviour:
   numStartingCards: 6
   drawTimeStagger: 0.1
   lootDeck: {fileID: 0}
-  drawPile: []
+  drawPile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   discardPile: []
   players: []
-  targetCard: {fileID: 0}
+  target: {fileID: 0}
   phase: 0
 --- !u!114 &656226639
 MonoBehaviour:
@@ -231,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6b941b43a905445a063ec2a0c76f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFaceUp: 0
+  startFaceUp: 1
   cardColorBlue: {fileID: 21300000, guid: f2e3abd22e9ae4d17ab5c0659ff3e024, type: 3}
   cardColorGreen: {fileID: 21300000, guid: f8c2745f3b53149c595d8fde43185468, type: 3}
   cardColorPurple: {fileID: 21300000, guid: 3f3ffa8970b63467cad6ba98725b1c95, type: 3}
@@ -242,6 +320,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 57881a9595f30b0449610b1e5e23e2d8, type: 3}
   - {fileID: 21300000, guid: 9987add5d5202ab4eab3d18f30d3a88f, type: 3}
   - {fileID: 21300000, guid: f172db54dd98d614a838095aee95af96, type: 3}
+  - {fileID: 21300000, guid: f6b5491d0148b304bbe8741eea3cadd2, type: 3}
+  - {fileID: 21300000, guid: 95ac434b54a861c42b873b0a9e3e8577, type: 3}
+  - {fileID: 21300000, guid: 0a91876112a0e9d4189ccbd221e5d6ce, type: 3}
+  - {fileID: 21300000, guid: 7b978a98a29067f44bd6885a08f6427c, type: 3}
+  - {fileID: 21300000, guid: 119c94520406c0f4c9a47c857dcbb1a8, type: 3}
+  - {fileID: 21300000, guid: d52000f9b6f789940bbbccc1129c8672, type: 3}
+  - {fileID: 21300000, guid: 080e84c76f424da46a4c1e98eb7b53fb, type: 3}
+  - {fileID: 21300000, guid: 6e08380382954464eb663d4f4d4d941f, type: 3}
+  - {fileID: 21300000, guid: 22fbf39568014804db4ceaf5b139bab3, type: 3}
+  - {fileID: 21300000, guid: 013671c66fa71264cb4507d15a7cf90e, type: 3}
+  - {fileID: 21300000, guid: 5ba46d19d8f127847a9e475f69e70185, type: 3}
+  - {fileID: 21300000, guid: 7af0bce1597d3184097e62adc4a02a59, type: 3}
+  - {fileID: 21300000, guid: 4836e87cf95707e468674ac2f5269ffd, type: 3}
+  - {fileID: 21300000, guid: ae001e56a2552b941956a644afeb1936, type: 3}
+  - {fileID: 21300000, guid: 27c567c92325f484fb452546b6dcdb86, type: 3}
+  - {fileID: 21300000, guid: 3a04ccb92c64f774fa6e7305e704caa1, type: 3}
+  - {fileID: 21300000, guid: 0692be54ad339f84d8e9bd97deef061e, type: 3}
+  - {fileID: 21300000, guid: 47bd923f5e779174ba03886d6c3733a4, type: 3}
+  - {fileID: 21300000, guid: 7ef939a3f2b4c254cb48b86b56f573d3, type: 3}
+  - {fileID: 21300000, guid: 90f8b62b83171904081fcf909de295fd, type: 3}
+  - {fileID: 21300000, guid: 23cf2fea8ad42454084ede8eb83c0b29, type: 3}
+  - {fileID: 21300000, guid: df21a587ea5d24a4fa02ea96230c5200, type: 3}
+  - {fileID: 21300000, guid: 0956d21b7b2f80842b26ff5484d0e625, type: 3}
   valueSprites: []
   cardBack: {fileID: 21300000, guid: a8185ed8d47594bb8a3b8e2d9233f769, type: 3}
   cardFront: {fileID: 21300000, guid: 873a7658b7ec742228520c7b15510f4d, type: 3}

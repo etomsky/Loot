@@ -16,15 +16,15 @@
 
   <slot type="target" x="-1.5" y="0" layer="4"/>
 
-  <slot type="hand" x="0" y="-8" rot="0"   player="1" layer="3"/>
-  <slot type="hand" x="-10" y="0"  rot="270" player="2" layer="3"/>
-  <slot type="hand" x="0" y="8"  rot="180" player="3" layer="3"/>
-  <slot type="hand" x="10" y="0"  rot="90"  player="4" layer="3"/>
+  <slot type="hand" x="0" y="-28" rot="0"   player="1" layer="3"/>
+  <slot type="hand" x="-30" y="0"  rot="270" player="2" layer="3"/>
+  <slot type="hand" x="0" y="28"  rot="180" player="3" layer="3"/>
+  <slot type="hand" x="30" y="0"  rot="90"  player="4" layer="3"/>
 
-  <slot type="merchant" x="0" y="-8" rot="0"   player="1" layer="5"/>
-  <slot type="merchant" x="-10" y="0"  rot="270" player="2" layer="5"/>
-  <slot type="merchant" x="0" y="8"  rot="180" player="3" layer="5"/>
-  <slot type="merchant" x="10" y="0"  rot="90"  player="4" layer="5"/>
+  <slot type="merchant" x="0" y="-18" rot="0"   player="1" layer="5"/>
+  <slot type="merchant" x="-20" y="0"  rot="270" player="2" layer="5"/>
+  <slot type="merchant" x="0" y="18"  rot="180" player="3" layer="5"/>
+  <slot type="merchant" x="20" y="0"  rot="90"  player="4" layer="5"/>
 
   <slot type="pirate" x="0" y="-8" rot="0"   player="1" layer="6"/>
   <slot type="pirate" x="-10" y="0"  rot="270" player="2" layer="6"/>

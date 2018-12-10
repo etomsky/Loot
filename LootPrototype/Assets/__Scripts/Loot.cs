@@ -30,7 +30,7 @@ public class Loot : MonoBehaviour {
     public List<CardLoot> drawPile;
     public List<CardLoot> discardPile;
     public List<LootPlayer> players;
-    public CardLoot targetCard;
+    public CardLoot target;
     public TurnPhase phase = TurnPhase.idle;
 
     private LootLayout layout;
@@ -110,9 +110,9 @@ public class Loot : MonoBehaviour {
 
         CardLoot tCL;
         // Deal six cards to each player
-        for (int i = 0; i < numStartingCards; i++)
+        for (int i=0; i<numStartingCards; i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j=0; j<4; j++)
             {
                 tCL = Draw(); // Draw a card
                 // Stagger the draw time a bit.
@@ -131,19 +131,6 @@ public class Loot : MonoBehaviour {
         CardLoot tCL = MoveToTarget(Draw());
         // Set the CardLoot to call CLCallback on this Loot when it is done
         tCL.reportFinishTo = this.gameObject;
-    }
-
-    // This makes a new card the target
-    public CardLoot MoveToTarget (CardLoot tCL)
-    {
-        tCL.timeStart = 0;
-        tCL.MoveTo(layout.discardPile.pos + Vector3.back);
-        tCL.state = CLState.toTarget;
-        tCL.faceUp = true;
-
-        targetCard = tCL;
-
-        return (tCL);
     }
 
     // This callback is used by the last card to be dealt at the beginning
@@ -224,10 +211,10 @@ public class Loot : MonoBehaviour {
     public bool ValidPlay(CardLoot cl)
     {
         // It's a valid play if the color is not the same
-        if (cl.color != targetCard.color) return (true);
+        if (cl.color != target.color) return (true);
 
         // It's a valid play if the  
-        if (cl.cardColor == targetCard.cardColor)
+        if (cl.cardColor == target.cardColor)
         {
             return (true);
         }
@@ -237,21 +224,21 @@ public class Loot : MonoBehaviour {
     }
 
     // This makes a new card the target
-    public CardLoot MoveToBattle(CardLoot tCL)
+    public CardLoot MoveToTarget(CardLoot tCL)
     {
         tCL.timeStart = 0;
         tCL.MoveTo(layout.discardPile.pos + Vector3.back);
-        tCL.state = CLState.toBattle;
+        tCL.state = CLState.toTarget;
         tCL.faceUp = true;
 
         tCL.SetSortingLayerName("10");
         tCL.eventualSortLayer = layout.battle.layerName;
-        if (targetCard != null)
+        if (target != null)
         {
-            MoveToDiscard(targetCard);
+            MoveToDiscard(target);
         }
 
-        targetCard = tCL;
+        target = tCL;
 
         return tCL;
     }
@@ -298,7 +285,7 @@ public class Loot : MonoBehaviour {
                 tCL.eventualSortLayer = "0";
             }
         }
-
+        
         drawPile.RemoveAt(0); // Then remove it from List<> drawPile
         return (cd); // And return it
     }
@@ -325,13 +312,13 @@ public class Loot : MonoBehaviour {
                     CURRENT_PLAYER.RemoveCard(tCL);
                     MoveToTarget(tCL);
                     tCL.callbackPlayer = CURRENT_PLAYER;
-                    Utils.tr("Loot:CardClicked()", "Play", tCL.name, targetCard.name + " is target");
+                    Utils.tr("Loot:CardClicked()", "Play", tCL.name, target.name + " is target");
                     phase = TurnPhase.waiting;
                 }
                 else
                 {
                     // Just ignore it but report what the player tried
-                    Utils.tr("Loot:CardClicked()", "Attempted to Play", tCL.name, targetCard.name + " is target");
+                    Utils.tr("Loot:CardClicked()", "Attempted to Play", tCL.name, target.name + " is target");
                 }
                 break;
         }
