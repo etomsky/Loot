@@ -29,6 +29,8 @@ public class LootLayout : MonoBehaviour {
     public SlotDef drawPile;
     public SlotDef discardPile;
     public SlotDef target;
+    public SlotDef merchant;
+    public SlotDef pirate;
     public SlotDef battle;
 
     // Loot calls this method to read in the LootLayoutXML.xml file
@@ -94,6 +96,14 @@ public class LootLayout : MonoBehaviour {
                     tSD.player = int.Parse(slotsX[i].att("player"));
                     tSD.rot = float.Parse(slotsX[i].att("rot"));
                     slotDefs.Add(tSD);
+                    break;
+
+                case "merchant":
+                    merchant = tSD;
+                    break;
+
+                case "pirate":
+                    tSD.player = int.Parse(slotsX[i].att("player"));
                     break;
             }
         }

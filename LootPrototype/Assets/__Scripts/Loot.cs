@@ -96,6 +96,8 @@ public class Loot : MonoBehaviour {
         // Position the drawPile cards
         ArrangeDrawPile();
 
+       
+
         // Set up the players
         LootPlayer pl;
         players = new List<LootPlayer>();
@@ -232,7 +234,7 @@ public class Loot : MonoBehaviour {
         tCL.faceUp = true;
 
         tCL.SetSortingLayerName("10");
-        tCL.eventualSortLayer = layout.battle.layerName;
+        tCL.eventualSortLayer = layout.pirate.layerName;
         if (target != null)
         {
             MoveToDiscard(target);
@@ -321,6 +323,8 @@ public class Loot : MonoBehaviour {
                     Utils.tr("Loot:CardClicked()", "Attempted to Play", tCL.name, target.name + " is target");
                 }
                 break;
+
+            
         }
     }
 }
