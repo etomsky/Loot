@@ -85,7 +85,7 @@
 
   <card type="merchant" value="8" color="none" sprite="merch8_"/>
 
-  <card type="captian" value="0" color="yello" sprite="capti_y"/>
+  <card type="captian" value="0" color="yellow" sprite="capti_y"/>
   <card type="captian" value="0" color="green" sprite="capti_g"/>
   <card type="captian" value="0" color="purple" sprite="capti_p"/>
   <card type="captian" value="0" color="blue" sprite="capti_b"/>

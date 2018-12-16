@@ -13,7 +13,12 @@ public enum CLState
     hand,
     discard,
     to,
-    idle
+    idle,
+    toPirate,
+    pirate,
+    toMerchant,
+    merchant
+    
 }
 
 public class CardLoot : Card {
@@ -73,6 +78,8 @@ public class CardLoot : Card {
             case CLState.toHand:
             case CLState.toTarget:
             case CLState.toDrawpile:
+            case CLState.toPirate:
+            case CLState.toMerchant:
             case CLState.to:
                 float u = (Time.time - timeStart) / timeDuration;
                 float uC = Easing.Ease(u, MOVE_EASING);
@@ -88,8 +95,10 @@ public class CardLoot : Card {
                     uC = 1;
                     // Move from the to... state to the proper next state
                     if (state == CLState.toHand) state = CLState.hand;
-                    if (state == CLState.toTarget) state = CLState.toTarget;
+                    if (state == CLState.toTarget) state = CLState.target;
                     if (state == CLState.toDrawpile) state = CLState.drawpile;
+                    if (state == CLState.toPirate) state = CLState.pirate;
+                    if (state == CLState.toMerchant) state = CLState.merchant;
                     if (state == CLState.to) state = CLState.idle;
 
                     // Move to the final position

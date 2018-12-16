@@ -1,35 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 
-public class CameraZoom : MonoBehaviour
+public class zoom : MonoBehaviour
 {
-    static public GameObject POI; // The static point of interest
+    public int zooming = 10;
+    public int normal = 20;
+    public float smooth = 5;
 
-    [Header("Set in Inspector")]
-    public float easing = 0.05f;
-    public Vector2 minXY = Vector2.zero;
+    private bool isZoomed = false;
 
-    [Header("Set Dynamically")]
-    public float camZ; // The desired Z pos of the camera
-
-    private void Awake()
+    public void Update()
     {
-        camZ = this.transform.position.z;
+      if(Input.GetMouseButtonDown(1))
+        {
+            isZoomed = !isZoomed;
+        }
+
+      if(isZoomed)
+        {
+            GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zooming, Time.deltaTime * smooth);
+        }
+
+      else
+        {
+            GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, normal, Time.deltaTime * smooth);
+        }
     }
-
-    private void FixedUpdate()
-    {
-        if (POI == null) return;
-
-        Vector3 destination = POI.transform.position;
-        destination.x = Mathf.Max(minXY.x, destination.x);
-        destination.y = Mathf.Max(minXY.y, destination.y);
-        destination = Vector3.Lerp(transform.position, destination, easing);
-        destination.z = camZ;
-        transform.position = destination;
-        Camera.main.orthographicSize = destination.y + 10;
-    }
-
 }
