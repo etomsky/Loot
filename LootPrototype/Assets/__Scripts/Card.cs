@@ -99,6 +99,7 @@ public class Card : MonoBehaviour {
 public class CardDefinition
 {
     public string sprite; // Sprite to use for each card
-    public int value; // The value (1-4) of this card
+    public int value; // The value (1-4) of this card 
+    public string face; // The identity of the face card (captain, admiral)
     public string cardColor; // The color (B, G, P, Y) of this card
 }
